@@ -6,12 +6,8 @@ Application Load Balancer (ALB) and NGINX Ingress Controller for path-based rout
 User flow diagram: ![EKS Architecture](./shop/diagram-export-9-6-2026-8_05_12-PM.png)
 
 
-
-
-
-=========================
  PROJECT STRUCTURE
-=========================
+
 [Users / Browser]
        │
        ▼
@@ -25,9 +21,9 @@ User flow diagram: ![EKS Architecture](./shop/diagram-export-9-6-2026-8_05_12-PM
        └── /api/orders   ──► [orders-service]    ──► [Orders API Pods (FastAPI)]
 
 
-=========================
+=============
  Tech stack
-=========================
+
 Cloud Platform:             AWS (Amazon EKS, AWS ALB, Amazon ECR)
 Container Orchestration:    Kubernetes (Deployments, ClusterIP Services, Ingress)
 Frontend:                   Nginx (shop-ui:1.0)
