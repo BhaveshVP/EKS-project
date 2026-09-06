@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>EKS Shop</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        pre {
+            background: #eee;
+            padding: 15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>EKS Shop</h1>
+
+    <p>
+        Simple Microservices Application
+    </p>
+
+    <button onclick="loadProducts()">
+        Products
+    </button>
+
+    <button onclick="loadOrders()">
+        Orders
+    </button>
+
+    <div id="result"></div>
+
+</div>
+
+
+<script>
+
+async function loadProducts() {
+
+    const response = await fetch("/api/products");
+
+    const products = await response.json();
+
+    let html = "<h2>Products</h2>";
+
+    products.forEach(product => {
+
+        html += `
+            <div class="item">
+
+                <b>${product.name}</b>
+
+                <br>
+
+                Category: ${product.category}
+
+                <br>
+
+                Price: Rs.${product.price}
+
+            </div>
+        `;
+
+    });
+
+    document.getElementById("result").innerHTML = html;
+}
+
+
+async function loadOrders() {
+
+    const response = await fetch("/api/orders");
+
+    const orders = await response.json();
+
+    let html = "<h2>Orders</h2>";
+
+    orders.forEach(order => {
+
+        html += `
+            <div class="item">
+
+                <b>Order #${order.id}</b>
+
+                <br>
+
+                Customer: ${order.customer}
+
+                <br>
+
+                Product: ${order.product}
+
+                <br>
+
+                Quantity: ${order.quantity}
+
+                <br>
+
+                Status: ${order.status}
+
+            </div>
+        `;
+
+    });
+
+    document.getElementById("result").innerHTML = html;
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-api
+  namespace: shop
+spec:
+
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: orders-api
+
+  template:
+
+    metadata:
+      labels:
+        app: orders-api
+
+    spec:
+
+      containers:
+
+        - name: orders-api
+
+          image: 191136519352.dkr.ecr.ap-south-1.amazonaws.com/orders
+
+          ports:
+            - containerPort: 8000
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-service
+  namespace: shop
+spec:
+  type: ClusterIP
+  selector:
+    app: orders-api
+  ports:
+    - port: 80
+      targetPort: 8000

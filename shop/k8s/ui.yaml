@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-ui
+  namespace: shop
+spec:
+
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: shop-ui
+
+  template:
+
+    metadata:
+      labels:
+        app: shop-ui
+
+    spec:
+
+      containers:
+
+        - name: shop-ui
+
+          image: 191136519352.dkr.ecr.ap-south-1.amazonaws.com/shop-ui 
+
+          ports:
+            - containerPort: 80
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui-service
+  namespace: shop
+spec:
+  type: ClusterIP
+  selector:
+    app: shop-ui
+  ports:
+    - port: 80
+      targetPort: 80
